@@ -32,16 +32,6 @@ const communitySchema = new mongoose.Schema({
       ref: "User",
     },
   ],
-  onboarded: {
-    type: Boolean,
-    default: false,
-  },
-  communities: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Community",
-    },
-  ],
 });
 
 const Community =

@@ -1,7 +1,7 @@
 import React from "react";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { fetchUser, getUserActivity } from "@/lib/actions/user.actions";
+import { fetchUser, getActivity } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import Image from "next/image";
 import UserCard from "@/components/cards/UserCard";
@@ -15,7 +15,7 @@ const Activity = async () => {
 
   if (!userInfo?.onboarded) redirect("/onboarding");
 
-  const activity: any = await getUserActivity(userInfo._id);
+  const activity: any = await getActivity(userInfo._id);
 
   return (
     <section>

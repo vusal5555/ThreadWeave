@@ -1,6 +1,6 @@
 import React from "react";
 import ThreadCard from "@/components/cards/ThreadCard";
-import { fetchThread } from "@/lib/actions/thread.actions";
+import { fetchThreadById } from "@/lib/actions/thread.actions";
 import { currentUser } from "@clerk/nextjs";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
@@ -11,7 +11,7 @@ const Thread = async ({ params }: { params: { id: string } }) => {
 
   const user = await currentUser();
 
-  const post = await fetchThread(params.id);
+  const post = await fetchThreadById(params.id);
 
   console.log(post);
 

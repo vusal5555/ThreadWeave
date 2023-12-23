@@ -15,9 +15,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "../ui/textarea";
-import { UpdateUser } from "@/lib/actions/user.actions";
+import { updateUser } from "@/lib/actions/user.actions";
 import { threadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
+import { useOrganization } from "@clerk/nextjs";
 
 type Props = {
   user: {
@@ -34,6 +35,9 @@ type Props = {
 const PostThread = ({ userId }: { userId: string }) => {
   const pathname = usePathname();
   const router = useRouter();
+  const { organization } = useOrganization();
+
+  console.log(organization?.id);
 
   const form = useForm({
     resolver: zodResolver(threadValidation),
@@ -47,7 +51,7 @@ const PostThread = ({ userId }: { userId: string }) => {
     await createThread({
       text: values.thread,
       author: userId,
-      communityId: null,
+      communityId: organization ? organization.id : null,
       path: pathname,
     });
 
