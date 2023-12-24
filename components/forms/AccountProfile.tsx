@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Textarea } from "../ui/textarea";
 import { useUploadThing } from "@/lib/uploadthing";
-import { UpdateUser } from "@/lib/actions/user.actions";
+import { updateUser } from "@/lib/actions/user.actions";
 
 type Props = {
   user: {
@@ -78,7 +78,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       }
     }
 
-    await UpdateUser({
+    await updateUser({
       username: values.username,
       name: values.name,
       bio: values.bio,

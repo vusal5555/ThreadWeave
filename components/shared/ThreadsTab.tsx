@@ -2,6 +2,7 @@ import { fetchUserPosts } from "@/lib/actions/user.actions";
 import React from "react";
 import ThreadCard from "../cards/ThreadCard";
 import { currentUser } from "@clerk/nextjs";
+import { fetchCommunityPosts } from "@/lib/actions/community.actions";
 
 interface Props {
   currentUserId: string;
@@ -10,9 +11,13 @@ interface Props {
 }
 
 const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
-  const posts = await fetchUserPosts(accountId);
+  let posts: any;
 
-  console.log(posts);
+  if (accountType === "Community") {
+    posts = await fetchCommunityPosts(accountId);
+  } else {
+    posts = await fetchUserPosts(accountId);
+  }
 
   const user = await currentUser();
 
@@ -29,7 +34,11 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
             author={
               accountType === "User"
                 ? { name: posts.name, image: posts.image, id: posts.id }
-                : { name: post.name, image: post.image, id: post.id }
+                : {
+                    name: post.author.name,
+                    image: post.author.image,
+                    id: post.author.id,
+                  }
             }
             community={post.community}
             createdAt={post.createdAt}

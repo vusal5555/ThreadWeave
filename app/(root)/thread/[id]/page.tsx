@@ -10,10 +10,9 @@ const Thread = async ({ params }: { params: { id: string } }) => {
   if (!params.id) return null;
 
   const user = await currentUser();
+  if (!user) return null;
 
   const post = await fetchThreadById(params.id);
-
-  console.log(post);
 
   const userInfo = await fetchUser(user?.id);
 
