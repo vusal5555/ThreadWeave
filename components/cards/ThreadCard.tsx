@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
 import { formatDateString } from "@/lib/utils";
 
@@ -76,6 +75,7 @@ const ThreadCard = ({
                   height={24}
                   className="cursor-pointer object-contain"
                 ></Image>
+
                 <Link href={`/thread/${id}`}>
                   <Image
                     src="/assets/reply.svg"

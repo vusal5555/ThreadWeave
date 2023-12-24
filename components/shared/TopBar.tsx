@@ -9,7 +9,7 @@ const TopBar = () => {
     <nav className="topbar">
       <Link href="/" className="flex items-center gap-4">
         <Image src="/assets/logo.svg" alt="Logo" width={28} height={28}></Image>
-        <p className="text-heading3-bold text-light-1 max-xs:hidden">
+        <p className="text-heading3-bold text-light-1 hidden md:block">
           ThreadWeave
         </p>
       </Link>
