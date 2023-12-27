@@ -7,6 +7,7 @@ import { connectDb } from "../mongoose";
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
+import { Truculenta } from "next/font/google";
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   connectDb();
@@ -241,4 +242,21 @@ export async function addCommentToThread(
     console.error("Error while adding comment:", err);
     throw new Error("Unable to add comment");
   }
+}
+
+export async function likedThread({
+  postId,
+  userId,
+}: {
+  postId: string;
+  userId: {
+    name: string;
+    image: string;
+    id: string;
+  };
+}) {
+  await Thread.findOneAndUpdate(
+    { _id: postId, author: userId.id },
+    { liked: (prev: any) => !prev }
+  );
 }
