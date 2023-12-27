@@ -65,6 +65,16 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     }
   };
 
+  const form = useForm({
+    resolver: zodResolver(userValidation),
+    defaultValues: {
+      profile_photo: user.image ? user.image : "",
+      name: user.name ? user.name : "",
+      username: user.username ? user.username : "",
+      bio: user?.bio ? user.bio : "",
+    },
+  });
+
   const onSubmit = async (values: z.infer<typeof userValidation>) => {
     const blob = values.profile_photo;
 
@@ -94,15 +104,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     }
   };
 
-  const form = useForm({
-    resolver: zodResolver(userValidation),
-    defaultValues: {
-      profile_photo: user.image,
-      name: user.name,
-      username: user.username,
-      bio: user.bio,
-    },
-  });
   return (
     <Form {...form}>
       <form
