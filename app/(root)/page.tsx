@@ -7,6 +7,8 @@ export default async function Home() {
 
   const user = await currentUser();
 
+  console.log(posts.posts);
+
   return (
     <>
       <h1 className="head-text text-left">Home</h1>
